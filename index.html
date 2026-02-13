@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smooth Vibes Smoothie Bar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      color: #222;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: #ff6f61;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+      background: #ff4b3a;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem 5rem;
+      gap: 2.5rem;
+    }
+
+    .hero-text {
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1.8rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero-text h1 {
+      margin-top: 0;
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-text p {
+      margin: 0.4rem 0;
+      line-height: 1.5;
+    }
+
+    .hero-cta {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn, .secondary-btn {
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .primary-btn {
+      background: #ff6f61;
+      color: #fff;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .secondary-btn {
+      background: #fff;
+      color: #ff6f61;
+      border: 2px solid #ff6f61;
+    }
+
+    .video-wrapper {
+      max-width: 420px;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      background: #000;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Chatbot widget */
+    .chatbot-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 320px;
+      max-width: 90vw;
+      background: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      font-size: 0.9rem;
+      z-index: 999;
+    }
+
+    .chatbot-header {
+      background: #ff6f61;
+      color: #fff;
+      padding: 0.7rem 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chatbot-header span {
+      font-weight: 600;
+    }
+
+    .chatbot-toggle {
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .chatbot-body {
+      display: flex;
+      flex-direction: column;
+      height: 260px;
+    }
+
+    .chatbot-messages {
+      flex: 1;
+      padding: 0.7rem;
+      overflow-y: auto;
+      background: #fff7f5;
+    }
+
+    .msg {
+      margin-bottom: 0.5rem;
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.7rem;
+      max-width: 85%;
+    }
+
+    .msg.bot {
+      background: #ffe0da;
+      align-self: flex-start;
+    }
+
+    .msg.user {
+      background: #d9fdd3;
+      align-self: flex-end;
+    }
+
+    .chatbot-input {
+      display: flex;
+      border-top: 1px solid #eee;
+    }
+
+    .chatbot-input input {
+      flex: 1;
+      border: none;
+      padding: 0.6rem;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .chatbot-input button {
+      border: none;
+      background: #ff6f61;
+      color: #fff;
+      padding: 0 0.9rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* X-Factor: Flavor randomizer */
+    .x-factor {
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .x-factor h2 {
+      margin-top: 0;
+    }
+
+    .flavor-display {
+      font-size: 1.1rem;
+      margin: 0.8rem 0 1.2rem;
+      font-weight: 600;
+      color: #ff4b3a;
+    }
+
+    .x-factor button {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: #ff6f61;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 1.5rem 2rem;
+      font-size: 0.85rem;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        padding-top: 2rem;
+      }
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Smooth Vibes Smoothie Bar</div>
+    <button class="nav-btn" onclick="location.href='about.html'">Learn More</button>
+  </header>
+
+  <main>
+    <section class="hero-text">
+      <h1>Blend Your Day with Smooth Vibes</h1>
+      <p>Fresh fruit, bold flavors, and feel-good energy in every sip. Crafted for busy students and late-night grinders.</p>
+      <p>Customize your smoothie, order ahead, and pick up on your way to class.</p>
+      <div class="hero-cta">
+        <button class="primary-btn" onclick="randomizeFlavor()">Surprise Me</button>
+        <button class="secondary-btn" onclick="location.href='about.html'">View Our Story</button>
+      </div>
+    </section>
+
+    <section class="video-wrapper">
+      <!-- Replace src with your AI-generated video file path (e.g., video/smoothie.mp4) -->
+      <video src="media/smoothie-concept.mp4" autoplay muted loop playsinline></video>
+    </section>
+  </main>
+
+  <section class="x-factor">
+    <h2>Flavor Vibe Randomizer</h2>
+    <p class="flavor-display" id="flavorDisplay">Click “Surprise Me” to discover today’s signature smoothie vibe.</p>
+    <button onclick="randomizeFlavor()">Surprise Me Again</button>
+  </section>
+
+  <footer>
+    X-Factor: Animated gradient background + “Flavor Vibe Randomizer” that suggests fun smoothie combinations for indecisive customers.
+  </footer>
+
+  <!-- Simple integrated chatbot -->
+  <div class="chatbot-container" id="chatbot">
+    <div class="chatbot-header">
+      <span>Smoothie Bot</span>
+      <span class="chatbot-toggle" onclick="toggleChatbot()">−</span>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="msg bot">Hey! I’m Smoothie Bot. Ask me about flavors, energy boosts, or our student specials.</div>
+      </div>
+      <form class="chatbot-input" onsubmit="handleChatSubmit(event)">
+        <input type="text" id="chatInput" placeholder="Type your question..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // X-Factor: Flavor randomizer logic
+    const flavors = [
+      "Tropical Sunrise: mango, pineapple, orange, coconut water",
+      "Berry Brain Boost: blueberry, strawberry, spinach, oat milk",
+      "Green Finals Fuel: kale, banana, peanut butter, almond milk",
+      "Pink Chill: dragon fruit, strawberry, coconut milk, chia",
+      "Cocoa Power Shake: banana, cacao, espresso shot, oat milk",
+      "Citrus Reset: orange, lemon, ginger, carrot, turmeric"
+    ];
+
+    function randomizeFlavor() {
+      const pick = flavors[Math.floor(Math.random() * flavors.length)];
+      document.getElementById("flavorDisplay").textContent = pick;
+    }
+
+    // Chatbot logic (simple rule-based demo)
+    function toggleChatbot() {
+      const body = document.getElementById("chatbotBody");
+      const toggle = document.querySelector(".chatbot-toggle");
+      if (body.style.display === "none") {
+        body.style.display = "flex";
+        toggle.textContent = "−";
+      } else {
+        body.style.display = "none";
+        toggle.textContent = "+";
+      }
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById("chatInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      addMessage(text, "user");
+      input.value = "";
+
+      const reply = getBotReply(text);
+      setTimeout(() => addMessage(reply, "bot"), 400);
+    }
+
+    function addMessage(text, type) {
+      const container = document.getElementById("chatbotMessages");
+      const msg = document.createElement("div");
+      msg.className = "msg " + type;
+      msg.textContent = text;
+      container.appendChild(msg);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function getBotReply(text) {
+      const lower = text.toLowerCase();
+      if (lower.includes("energy") || lower.includes("tired")) {
+        return "Try our Green Finals Fuel with kale, banana, and a shot of espresso for a clean boost.";
+      }
+      if (lower.includes("vegan") || lower.includes("dairy")) {
+        return "Most smoothies can be made with oat or almond milk. Ask for vegan swaps at checkout.";
+      }
+      if (lower.includes("special") || lower.includes("student")) {
+        return "Students get 10% off after 5 PM with a valid ID. Perfect for evening study sessions.";
+      }
+      if (lower.includes("favorite") || lower.includes("recommend")) {
+        return "My pick: Berry Brain Boost—blueberry, strawberry, spinach, and oat milk.";
+      }
+      return "Yum. That sounds good. You can customize any base with extra fruit, protein, or energy shots.";
+    }
+  </script>
+</body>
+</html>
